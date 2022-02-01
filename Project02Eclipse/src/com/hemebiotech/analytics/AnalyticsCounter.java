@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,7 +13,7 @@ import java.util.TreeMap;
 public class AnalyticsCounter {
 
 	List<String> symptomList = new ArrayList<String>();
-	Map<String, Integer> noSortedSymptomList = new HashMap<String, Integer>();
+	Map<String, Integer> sortedSymptomList = new TreeMap<String, Integer>();
 
 	public void readFile(String filePathInput) {
 
@@ -39,13 +38,13 @@ public class AnalyticsCounter {
 		for (int i = 0; i < symptomList.size(); i++) {
 			String symptom = symptomList.get(i);
 
-			boolean exists = noSortedSymptomList.containsKey(symptom);
+			boolean exists = sortedSymptomList.containsKey(symptom);
 
 			if (exists == true) {
-				int nbOcc = noSortedSymptomList.get(symptom) + 1;
-				noSortedSymptomList.put(symptom, nbOcc);
+				int nbOcc = sortedSymptomList.get(symptom) + 1;
+				sortedSymptomList.put(symptom, nbOcc);
 			} else {
-				noSortedSymptomList.put(symptom, 1);
+				sortedSymptomList.put(symptom, 1);
 			}
 		}
 
@@ -53,12 +52,13 @@ public class AnalyticsCounter {
 
 	public void writeFile(String filePathOutput) {
 
-		Map<String, Integer> SortedSymptomList = new TreeMap<String, Integer>(noSortedSymptomList);
+		// Map<String, Integer> SortedSymptomList = new TreeMap<String,
+		// Integer>(noSortedSymptomList);
 
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filePathOutput));
 
-			for (Map.Entry<String, Integer> entry : SortedSymptomList.entrySet()) {
+			for (Map.Entry<String, Integer> entry : sortedSymptomList.entrySet()) {
 				String key = entry.getKey();
 				Integer value = entry.getValue();
 				String keyValue = key + " : " + value;
