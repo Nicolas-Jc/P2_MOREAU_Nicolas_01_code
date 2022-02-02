@@ -10,11 +10,42 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * <b>AnalyticsCounter est la classe permettant : </b>
+ * <ol>
+ * <li>la lecture du fichier des symptomes fourni en entrée</li>
+ * <li>le comptage des occurences de chaque symtome</li>
+ * <li>l'écriture dans le fichier de sortie de la liste triée des symptomes,
+ * avec le nombre d'occurences associées pour chacun</li>
+ * </ol>
+ * 
+ * @author Nicolas Moreau
+ * @version 1.0
+ */
 public class AnalyticsCounter {
 
+	/**
+	 * symptomList est l'objet qui permet de stocker en mémoire l'intégralité des
+	 * lignes (type symptome) lues dans le fichier
+	 * 
+	 * 
+	 */
 	List<String> symptomList = new ArrayList<String>();
+	/**
+	 * sortedSymptomList est l'objet qui permet de stocker en mémoire, la liste
+	 * directement triée des symptomes avec le nombre d'occurences associées de
+	 * chacun
+	 * 
+	 * 
+	 */
 	Map<String, Integer> sortedSymptomList = new TreeMap<String, Integer>();
 
+	/**
+	 * Lit le contenu du fichier fourni en entrée.
+	 * 
+	 * @param filePathInput Emplacement et Nom du fichier en Entrée.
+	 * 
+	 */
 	public void readFile(String filePathInput) {
 
 		if (filePathInput != null) {
@@ -33,6 +64,11 @@ public class AnalyticsCounter {
 		}
 	}
 
+	/**
+	 * Compte le nombre d'occurences de chaque symptome.
+	 * 
+	 * 
+	 */
 	public void countOcc() {
 
 		for (int i = 0; i < symptomList.size(); i++) {
@@ -50,10 +86,13 @@ public class AnalyticsCounter {
 
 	}
 
+	/**
+	 * Ecrit dans le fichier en sortie.
+	 * 
+	 * @param filePathOutput Emplacement et Nom du fichier en sortie.
+	 * 
+	 */
 	public void writeFile(String filePathOutput) {
-
-		// Map<String, Integer> SortedSymptomList = new TreeMap<String,
-		// Integer>(noSortedSymptomList);
 
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filePathOutput));
